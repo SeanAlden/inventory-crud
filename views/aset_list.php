@@ -27,7 +27,6 @@
         border-radius: 5px;
     }
 
-    /* Style tambahan untuk link sorting di header tabel */
     .sort-link {
         color: white;
         text-decoration: none;
@@ -127,9 +126,7 @@
                         <tr>
                             <th style="width: 100px;">
                                 <?php 
-                                    // Tentukan urutan selanjutnya (kebalikan dari saat ini)
                                     $nextOrder = ($order == 'ASC') ? 'DESC' : 'ASC';
-                                    // Tentukan icon (Jika ASC pakai panah atas, jika DESC panah bawah)
                                     $iconClass = ($order == 'ASC') ? 'bi-sort-numeric-down-alt' : 'bi-sort-numeric-down';
                                 ?>
                                 <a href="?order=<?= $nextOrder ?>&search=<?= $search ?>&limit=<?= $limit ?>&page=<?= $page ?>"
@@ -145,8 +142,8 @@
                     </thead>
                     <tbody>
                         <?php
-                        if (isset($data) && mysqli_num_rows($data) > 0) {
-                            while ($row = mysqli_fetch_assoc($data)) {
+                        if (isset($data) && $data instanceof mysqli_result && mysqli_num_rows($data) > 0) {
+                        while ($row = mysqli_fetch_assoc($data)) {
                         ?>
                         <tr>
                             <td><?= $row['kode_aset']; ?></td>
@@ -273,7 +270,6 @@
                                     echo '<li class="page-item disabled"><span class="page-link">...</span></li>';
                                 } else {
                                     $active = ($page == $p) ? 'active' : '';
-                                    // Tambahkan order pada setiap link halaman
                             echo '<li class="page-item ' . $active . '"><a class="page-link"
                                     href="?page=' . $p . '&search=' . $search . '&limit=' . $limit . '&order=' . $order . '">'
                                     . $p . '</a></li>';

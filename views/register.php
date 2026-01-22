@@ -52,11 +52,9 @@ if (isset($_POST['register'])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
     document.addEventListener("DOMContentLoaded", function() {
-        // Cari semua elemen dengan class 'alert'
         var alerts = document.querySelectorAll('.alert');
 
         alerts.forEach(function(alert) {
-            // Set waktu 2000 milidetik (2 detik)
             setTimeout(function() {
                 var bsAlert = new bootstrap.Alert(alert);
                 bsAlert.close();

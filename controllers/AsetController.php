@@ -12,7 +12,6 @@ class AsetController
 
     public function index()
     {
-        // CRUD
 
         if (isset($_POST['simpan'])) {
             $nama = $_POST['nama_aset'];
@@ -20,7 +19,6 @@ class AsetController
             $harga = $_POST['harga_perolehan'];
 
             if (!empty($nama) && !empty($tgl) && !empty($harga)) {
-                // Cek hasil return dari model (True/False)
                 if ($this->model->insert($nama, $tgl, $harga)) {
                     $_SESSION['flash_message'] = ['type' => 'success', 'text' => 'Data berhasil ditambahkan!'];
                 } else {
@@ -58,26 +56,16 @@ class AsetController
             exit;
         }
 
-        // Logika untuk Pagination dan Pencarian
-
         $limit = isset($_GET['limit']) ? (int) $_GET['limit'] : 5;
         $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
         $start = ($page - 1) * $limit;
         $search = isset($_GET['search']) ? $_GET['search'] : '';
 
-        // 2. Tambahan Logika Order (Sorting)
-        // Jika ada parameter 'order' di URL dan nilainya 'ASC', maka set 'ASC', selain itu default 'DESC'
         $order = (isset($_GET['order']) && strtoupper($_GET['order']) == 'ASC') ? 'ASC' : 'DESC';
 
-        // 3. Panggil Model dengan parameter order
         $data = $this->model->getAll($search, $start, $limit, $order);
         $total = $this->model->countTotal($search);
 
-        // // Ambil Data dari Model
-        // $data = $this->model->getAll($search, $start, $limit);
-        // $total = $this->model->countTotal($search);
-
-        // Hitung Logic Pagination Dasar
         $totalPage = ceil($total / $limit);
         $showingStart = ($total > 0) ? $start + 1 : 0;
         $showingEnd = ($total > 0) ? min($start + $limit, $total) : 0;

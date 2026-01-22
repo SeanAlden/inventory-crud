@@ -6,7 +6,6 @@ $auth = new AuthController($conn);
 $auth->checkGuest();
 $error = '';
 
-// Cek Flash Message dari Register
 $msg = isset($_SESSION['flash_message']) ? $_SESSION['flash_message'] : null;
 unset($_SESSION['flash_message']);
 
@@ -59,11 +58,9 @@ if (isset($_POST['login'])) {
 
     <script>
     document.addEventListener("DOMContentLoaded", function() {
-        // Cari semua elemen dengan class 'alert'
         var alerts = document.querySelectorAll('.alert');
 
         alerts.forEach(function(alert) {
-            // Set waktu 2000 milidetik (2 detik)
             setTimeout(function() {
                 var bsAlert = new bootstrap.Alert(alert);
                 bsAlert.close();

@@ -30,18 +30,8 @@ class AsetModel
         return mysqli_query($this->conn, $query);
     }
 
-    // public function getAll($search, $start, $limit)
-    // {
-    //     $query = "SELECT * FROM satona 
-    //               WHERE nama_aset LIKE '%$search%' 
-    //               ORDER BY kode_aset DESC 
-    //               LIMIT $start, $limit";
-    //     return mysqli_query($this->conn, $query);
-    // }
-
     public function getAll($search, $start, $limit, $order = 'DESC')
     {
-        // Validasi keamanan agar hanya bisa 'ASC' atau 'DESC' (Mencegah SQL Injection)
         $direction = ($order == 'ASC') ? 'ASC' : 'DESC';
 
         $query = "SELECT * FROM satona 
