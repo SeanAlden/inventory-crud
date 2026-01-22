@@ -1,11 +1,14 @@
 <?php
-session_start(); 
+// --- 1. PROTEKSI HALAMAN (Cek Login) ---
+require_once 'config/database.php';
+require_once 'controllers/AuthController.php';
+require_once 'controllers/AsetController.php';
 
-include 'config/database.php';
+$auth = new AuthController($conn);
+$auth->checkAuth(); // Redirect ke login jika belum login
 
-include 'controllers/AsetController.php';
+// --- LOGIKA CRUD (Kode asli anda tetap disini) ---
+// (Pastikan logika PHP untuk query select/insert/update/delete ada di atas sini seperti kode anda sebelumnya)
 
-$controller = new AsetController($conn);
-
-$controller->index();
-?>
+$data = new AsetController($conn);
+$data->index();

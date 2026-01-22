@@ -1,5 +1,5 @@
 <?php
-include 'models/AsetModel.php';
+include __DIR__ . '/../models/AsetModel.php';
 
 class AsetController
 {
@@ -65,9 +65,17 @@ class AsetController
         $start = ($page - 1) * $limit;
         $search = isset($_GET['search']) ? $_GET['search'] : '';
 
-        // Ambil Data dari Model
-        $data = $this->model->getAll($search, $start, $limit);
+        // 2. Tambahan Logika Order (Sorting)
+        // Jika ada parameter 'order' di URL dan nilainya 'ASC', maka set 'ASC', selain itu default 'DESC'
+        $order = (isset($_GET['order']) && strtoupper($_GET['order']) == 'ASC') ? 'ASC' : 'DESC';
+
+        // 3. Panggil Model dengan parameter order
+        $data = $this->model->getAll($search, $start, $limit, $order);
         $total = $this->model->countTotal($search);
+
+        // // Ambil Data dari Model
+        // $data = $this->model->getAll($search, $start, $limit);
+        // $total = $this->model->countTotal($search);
 
         // Hitung Logic Pagination Dasar
         $totalPage = ceil($total / $limit);
