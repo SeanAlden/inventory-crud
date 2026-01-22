@@ -1,6 +1,12 @@
 <?php
-$conn = mysqli_connect("localhost", "root", "", "db_inventarisir_aset");
+$host = "localhost";
+$user = "root";
+$pass = "";
+$db = "db_inventarisir_aset";
+
+$conn = mysqli_connect($host, $user, $pass, $db);
 
 if (!$conn) {
     die("Koneksi gagal: " . mysqli_connect_error());
 }
+?>
