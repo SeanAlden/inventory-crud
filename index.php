@@ -135,7 +135,7 @@ $showingEnd = ($total > 0) ? min($start + $limit, $total) : 0;
                 </td>
             </tr>
 
-            <div class="modal fade" id="editModal<?= $row['kode_aset']; ?>" tabindex="-1">
+            <!-- <div class="modal fade" id="editModal<?= $row['kode_aset']; ?>" tabindex="-1">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -154,6 +154,42 @@ $showingEnd = ($total > 0) ? min($start + $limit, $total) : 0;
                                     <label>Tanggal Perolehan</label>
                                     <input type="date" name="tanggal_perolehan" class="form-control"
                                         value="<?= $row['tanggal_perolehan']; ?>" required>
+                                </div>
+                                <div class="mb-2">
+                                    <label>Harga Perolehan</label>
+                                    <input type="number" name="harga_perolehan" class="form-control"
+                                        value="<?= $row['harga_perolehan']; ?>" required>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                <button type="submit" name="update" class="btn btn-primary">Update</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div> -->
+
+            <div class="modal fade" id="editModal<?= $row['kode_aset']; ?>" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Edit Aset</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <form method="POST">
+                            <div class="modal-body">
+                                <input type="hidden" name="kode_aset" value="<?= $row['kode_aset']; ?>">
+                                <div class="mb-2">
+                                    <label>Nama Aset</label>
+                                    <input type="text" name="nama_aset" class="form-control"
+                                        value="<?= $row['nama_aset']; ?>" required>
+                                </div>
+                                <div class="mb-2">
+                                    <label>Tanggal & Jam Perolehan</label>
+                                    <input type="datetime-local" name="tanggal_perolehan" class="form-control"
+                                        value="<?= date('Y-m-d\TH:i', strtotime($row['tanggal_perolehan'])); ?>"
+                                        required>
                                 </div>
                                 <div class="mb-2">
                                     <label>Harga Perolehan</label>
@@ -213,35 +249,35 @@ $showingEnd = ($total > 0) ? min($start + $limit, $total) : 0;
                 </li>
 
                 <?php
-               
+
                 $pageNumbers = [];
 
                 if ($totalPage <= 7) {
-                   
+
                     for ($i = 1; $i <= $totalPage; $i++) {
                         $pageNumbers[] = $i;
                     }
                 } else {
-                   
+
                     if ($page <= 4) {
-                       
-                       
+
+
                         for ($i = 1; $i <= 5; $i++)
                             $pageNumbers[] = $i;
                         $pageNumbers[] = '...';
                         $pageNumbers[] = $totalPage;
 
                     } elseif ($page >= $totalPage - 3) {
-                       
-                       
+
+
                         $pageNumbers[] = 1;
                         $pageNumbers[] = '...';
                         for ($i = $totalPage - 4; $i <= $totalPage; $i++)
                             $pageNumbers[] = $i;
 
                     } else {
-                       
-                       
+
+
                         $pageNumbers[] = 1;
                         $pageNumbers[] = '...';
                         $pageNumbers[] = $page - 1;
@@ -252,7 +288,7 @@ $showingEnd = ($total > 0) ? min($start + $limit, $total) : 0;
                     }
                 }
 
-               
+
                 foreach ($pageNumbers as $p) {
                     if ($p == '...') {
                         echo '<li class="page-item disabled"><span class="page-link">...</span></li>';
@@ -273,7 +309,7 @@ $showingEnd = ($total > 0) ? min($start + $limit, $total) : 0;
         </nav>
     </div>
 
-    <div class="modal fade" id="tambahModal" tabindex="-1">
+    <!-- <div class="modal fade" id="tambahModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -289,6 +325,37 @@ $showingEnd = ($total > 0) ? min($start + $limit, $total) : 0;
                         <div class="mb-2">
                             <label>Tanggal Perolehan</label>
                             <input type="date" name="tanggal_perolehan" class="form-control" required>
+                        </div>
+                        <div class="mb-2">
+                            <label>Harga Perolehan</label>
+                            <input type="number" name="harga_perolehan" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" name="simpan" class="btn btn-success">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div> -->
+
+    <div class="modal fade" id="tambahModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Tambah Aset Baru</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <form method="POST">
+                    <div class="modal-body">
+                        <div class="mb-2">
+                            <label>Nama Aset</label>
+                            <input type="text" name="nama_aset" class="form-control" required>
+                        </div>
+                        <div class="mb-2">
+                            <label>Tanggal & Jam Perolehan</label>
+                            <input type="datetime-local" name="tanggal_perolehan" class="form-control" required>
                         </div>
                         <div class="mb-2">
                             <label>Harga Perolehan</label>
